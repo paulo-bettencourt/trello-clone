@@ -16,4 +16,25 @@ export class ApiService {
     this.todo$.next([...this.todo$.getValue(), task])
   }
 
+  deleteTodo(item: any) {
+    // Get current items from the BehaviorSubject.
+    const currentItems = this.todo$.getValue();
+    // Use the id of the argument item to remove it from the currentItems.
+    // @ts-ignore
+    const itemsWithoutDeleted = currentItems.filter(itemObservable => itemObservable !== item);
+    // Emit the new array.
+    console.log("olé", item)
+    this.todo$.next(itemsWithoutDeleted);
+  }
+
+  deleteDone(item: any) {
+    // Get current items from the BehaviorSubject.
+    const currentItems = this.done$.getValue();
+    // Use the id of the argument item to remove it from the currentItems.
+    // @ts-ignore
+    const itemsWithoutDeleted = currentItems.filter(itemObservable => itemObservable !== item);
+    // Emit the new array.
+    console.log("olé", item)
+    this.done$.next(itemsWithoutDeleted);
+  }
 }

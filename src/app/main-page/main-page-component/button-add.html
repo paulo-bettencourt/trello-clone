@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-card-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Trello Clone</mat-label>
+      <input #task matInput placeholder="Add your task">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button id="modal-button" color="primary" (click)="addTask(task.value)">Add task</button>
+  </mat-card-content>
+</mat-card>
+
+

@@ -11,7 +11,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {FormsModule} from "@angular/forms";
-import {ButtonDialogModal} from "./main-page/main-page-component/main-page-component.component";
 
 @NgModule({
   declarations: [

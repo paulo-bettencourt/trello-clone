@@ -1,22 +1,33 @@
-import {Component, Injectable} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {ApiService} from "../../services/api.service";
+import {BehaviorSubject, Observable} from "rxjs";
 
-@Injectable({
-  providedIn: 'root'
-})
 @Component({
   selector: 'app-main-page-component',
   templateUrl: './main-page-component.component.html',
-  styleUrls: ['./main-page-component.component.scss']
+  styleUrls: ['./main-page-component.component.scss'],
 })
 export class MainPageComponentComponent {
 
-  constructor(public dialog: MatDialog) {}
+  todo!: string[];
+  done!: string[];
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  constructor(public dialog: MatDialog, private service: ApiService) {
+    this.service.todo$.subscribe(
+      (data: string[])  => {
+        this.todo = data
+      }
+    )
 
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+    this.service.done$.subscribe(
+      (data: string[]) => {
+        this.done = data
+      }
+    )
+  }
+
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -39,21 +50,52 @@ export class MainPageComponentComponent {
       exitAnimationDuration,
     });
   }
+
+  addTask(task: string) {
+    this.todo.push(task)
+    this.dialog.closeAll();
+  }
+
+  deleteItemTodo(item: string) {
+    this.service.deleteTodo(item);
+  }
+
+  deleteItemDone(item: string) {
+    this.service.deleteDone(item);
+  }
 }
 
 @Component({
   selector: 'dialog-animations-example-dialog',
   templateUrl: 'button-add.html',
-  styleUrls: ['./main-page-component.component.scss']
+  styleUrls: ['./main-page-component.component.scss'],
 })
-export class ButtonDialogModal {
-  constructor(public dialogRef: MatDialogRef<ButtonDialogModal>, private mainPageComponent: MainPageComponentComponent, public dialog: MatDialog) {}
+export class ButtonDialogModal implements AfterViewInit{
 
-  addTask(e: any) {
-    console.log("task", e)
-    const task = e as unknown as string;
-    this.mainPageComponent.todo.push(e)
-    console.log("array", this.mainPageComponent.todo)
+  input!: HTMLElement;
+  modalButton!: HTMLElement;
+
+  constructor(public dialogRef: MatDialogRef<ButtonDialogModal>, private service: ApiService, public dialog: MatDialog) {}
+
+  ngAfterViewInit(): void {
+    this.input = document.getElementById("myInputAdd")!;
+    this.modalButton = document.getElementById("modal-button")!;
+    this.enterAndClick();
+  }
+
+  addTask(newTask: string) {
+    this.service.addNewTask(newTask);
+    this.enterAndClick();
     this.dialog.closeAll();
+  }
+
+  enterAndClick() {
+    this.input.addEventListener("keypress", (event: Event) => {
+      // @ts-ignore
+      if (event.key === "Enter") {
+        this.modalButton.click();
+        this.dialog.closeAll();
+      }
+    });
   }
 }

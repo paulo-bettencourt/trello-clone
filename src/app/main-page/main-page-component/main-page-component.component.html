@@ -1,7 +1,6 @@
 <div class="general-container">
-  <div class="example-container">
+  <div class="tasks-container">
     <h2>To do</h2>
-
     <div
       cdkDropList
       #todoList="cdkDropList"
@@ -9,13 +8,11 @@
       [cdkDropListConnectedTo]="[doneList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}  <a href="#" (click)="deleteItemTodo(item)"><mat-icon>delete_outline</mat-icon></a></div>
     </div>
   </div>
-
-  <div class="example-container">
+  <div class="tasks-container">
     <h2>Done</h2>
-
     <div
       cdkDropList
       #doneList="cdkDropList"
@@ -23,10 +20,9 @@
       [cdkDropListConnectedTo]="[todoList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}  <a href="#" (click)="deleteItemDone(item)"><mat-icon>delete_outline</mat-icon></a></div>
     </div>
   </div>
 </div>
-
-<button mat-raised-button color="primary" (click)="openDialog('0ms', '0ms')">Add a new task to the list</button>
+<button mat-raised-button color="primary" id="myInput" (click)="openDialog('0ms', '0ms')">Add a new task to the list</button>
 

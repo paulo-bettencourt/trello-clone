@@ -1,0 +1,15 @@
+body {
+  border: 1px solid transparent;
+}
+
+@media (max-width: 900px) {
+  mat-card {
+    margin-top: 10%;
+    margin-bottom: 100px !important;
+  }
+
+  .white-space {
+    max-height: 50px;
+    color: white;
+  }
+}

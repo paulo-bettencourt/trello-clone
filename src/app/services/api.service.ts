@@ -9,7 +9,7 @@ export class ApiService {
   todo$ = new BehaviorSubject<string[]>( ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'])
   done$ = new BehaviorSubject<string[]>(['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'])
 
-  addNewTask(newTask: string) {ß
+  addNewTask(newTask: string) {
     this.todo$.next([...this.todo$.getValue(), newTask])
   }
 

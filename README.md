@@ -17,6 +17,10 @@ You can test the Trello Clone at `https://trello-clone-5f870.web.app/`
 
 <img width="1792" alt="Screenshot 2023-01-19 at 23 08 52" src="https://user-images.githubusercontent.com/37920932/213589584-11fe095b-4812-4e1e-a23b-6c055af41efd.png">
 
+<img width="1792" alt="Screenshot 2023-01-19 at 23 43 40" src="https://user-images.githubusercontent.com/37920932/213593741-420249e3-780f-4b23-ad69-5e8b8a32b61d.png">
+
+<img width="1792" alt="Screenshot 2023-01-19 at 23 42 11" src="https://user-images.githubusercontent.com/37920932/213593593-52f963cb-b687-483d-9e1a-af488d5bc005.png">
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
